@@ -1,5 +1,6 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
+import { habitsRoute } from "./routes/habit.js";
 
 const fastify = Fastify({
   logger: false,
@@ -10,9 +11,7 @@ await fastify.register(cors, {
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 });
 
-fastify.get("/", async () => {
-  return { hello: "world" };
-});
+fastify.register(habitsRoute, { prefix: "/habits" });
 
 fastify.listen({ port: 3000 }, function (err, address) {
   if (err) {
