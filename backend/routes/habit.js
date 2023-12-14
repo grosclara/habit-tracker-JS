@@ -54,7 +54,6 @@ const toggleHabit = async (req, res) => {
   }
   await updateHabit(habitId)
     .then((habit) => {
-      console.log(!habit);
       if (!habit) throw new ResourceNotFoundError(`Habit ${habitId} not found`);
       res.type("application/json").send(habit);
     })
