@@ -1,11 +1,20 @@
+import { updateHabit } from "../api/habit.js";
+
 export class HabitComponent {
-  constructor({ title, isDoneToday }) {
+  constructor({ id, title, isDoneToday }) {
+    this.id = id;
     this.title = title;
     this.isDoneToday = isDoneToday;
   }
 
   init() {
     this.render();
+  }
+
+  async toggleIsDone() {
+    const habit = await updateHabit(this.id);
+    if (!habit) return;
+    this.isDoneToday = !this.isDoneToday;
   }
 
   render() {

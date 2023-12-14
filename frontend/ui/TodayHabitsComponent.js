@@ -28,10 +28,17 @@ export class TodayHabitsComponent {
   render() {
     for (const habit of this.habits) {
       const habitComponent = new HabitComponent({
+        id: habit.id,
         title: habit.title,
         isDoneToday: habit.daysDone[this.today],
       });
       habitComponent.init();
+
+      habitComponent.element.addEventListener("click", async () => {
+        await habitComponent.toggleIsDone();
+        this.refresh();
+      });
+
       this.element.appendChild(habitComponent.element);
     }
   }
